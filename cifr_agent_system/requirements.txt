@@ -1,0 +1,12 @@
+google-cloud-aiplatform
+google-cloud-dlp
+google-cloud-pubsub
+google-cloud-storage
+google-cloud-language
+google-genai # Added for direct Gemini API access
+openai # For OpenAI-compatible fallback service (optional)
+cryptography
+pillow
+python-dotenv # For local environment variable management
+Flask[async]
+Flask[async] # For the web UI
