@@ -1,3 +1,0 @@
-# Core hackathon modules package
-
-
