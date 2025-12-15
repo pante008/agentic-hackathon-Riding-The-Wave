@@ -1,23 +1,21 @@
-# Demo Video
+# CIFR Agent System – Demo
 
-Please record a 3–5 minute walkthrough showing:
+Provide a public 3–5 minute video link here (YouTube unlisted, Drive public, Loom, etc.).
 
-- The problem you solve  
-- End-to-end agent behavior on a representative example  
-- Highlighted “agentic” steps (planning, tool calls, memory use)
+## Video Link
+- TBD – paste final link here.
 
----
+## Timestamped Highlights
+- 00:00–00:30 Intro & setup
+- 00:30–01:30 User input → Planning (Planner + Executor)
+- 01:30–02:30 Tool calls & memory (CommunicationAgent, KnowledgeAgent, FrictionDetectionAgent)
+- 02:30–03:30 Final output & edge cases (InterventionAgent + fallback flows)
 
-📺 **Provide a Hosted Public Video Link (YouTube unlisted / Loom / MP4):**  MUST BE ON A HOS
-https://your.video.link.here
+## How to Reproduce
+1) `python -m venv .venv && source .venv/bin/activate`
+2) `pip install -r cifr_agent_system/requirements.txt`
+3) Create `.env` with `GCP_PROJECT_ID`, `GOOGLE_API_KEY`, optional `GEMINI_PRO_MODEL_ID`, `GEMINI_PRO_VISION_MODEL_ID`.
+4) Run `python -m cifr_agent_system.main` for the CLI demo.
+5) (Optional) Run web dashboard via option 2 in the menu.
 
-PLEASE DO NOT UPLOAD RAW VIDOE FILES. These submissions will not be reviewed.
 
-### Timestamps
-
-- **00:00–00:30** — Introduction & setup  
-- **00:30–01:30** — User input → Planning step  
-- **01:30–02:30** — Tool calls & memory retrieval  
-- **02:30–03:30** — Final output & edge-case handling
-
-- Vidoes longer than 5 minutes may not be reviewd. 

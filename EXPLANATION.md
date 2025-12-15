@@ -1,35 +1,41 @@
-# Technical Explanation
+# CIFR Agent System – Explanation
 
-## 1. Agent Workflow
+This document follows the Agentic AI Hackathon template requirements.
 
-Describe step-by-step how your agent processes an input:
-1. Receive user input  
-2. (Optional) Retrieve relevant memory  
-3. Plan sub-tasks (e.g., using ReAct / BabyAGI pattern)  
-4. Call tools or APIs as needed  
-5. Summarize and return final output  
+## Planning Style
+- Planner uses Gemini text model (`google.genai`) to turn user goals into 3–6 sub-tasks.
+- Output format: JSON list with `id`, `action`, `input`, `notes`, `expected_output`.
+- Fallback heuristics ensure planning works even if Gemini is unavailable.
 
-## 2. Key Modules
+## Execution Flow
+1) Planner creates steps.
+2) Executor iterates steps and routes to agents:
+   - `analyze_messages` → CommunicationAgent (Gemini Vision/Text + Language API).
+   - `detect_friction` → FrictionDetectionAgent (Gemini reasoning).
+   - `generate_interventions` → InterventionAgent (Gemini suggestions).
+3) Results and reasoning traces are stored in KnowledgeAgent and Memory store.
 
-- **Planner** (`planner.py`): …  
-- **Executor** (`executor.py`): …  
-- **Memory Store** (`memory.py`): …  
+## Memory Usage
+- `KnowledgeAgent` maintains contextual store for analyses and recommendations.
+- `src/memory.py` provides a lightweight append-only log for executions.
+- Future: persist to datastore and add retrieval-augmented prompts.
 
-## 3. Tool Integration
+## Tool Integration
+- Gemini API via `google.genai` for:
+  - Multimodal analysis (CommunicationAgent).
+  - Friction reasoning (FrictionDetectionAgent).
+  - Intervention drafting (InterventionAgent).
+  - Planning (Planner).
+- GCP language services for sentiment/entities as a fallback/augmenter.
 
-List each external tool or API and how you call it:
-- **Search API**: function `search(query)`  
-- **Calculator**: LLM function calling  
+## Limitations
+- Requires valid `GOOGLE_API_KEY`; Config raises if missing.
+- Memory is in-process only; no persistence yet.
+- Planning/exec parsing assumes well-formed Gemini JSON; guarded with fallbacks.
+- Demo uses synthetic messages; real integrations (Slack/Gmail/Drive) are stubs.
 
-## 4. Observability & Testing
+## Known Risks
+- `key.json` is present locally; remove from git history and rely on `.env`.
+- Network/API failures degrade to heuristic flows; add retries/backoff for prod.
 
-Explain your logging and how judges can trace decisions:
-- Logs saved in `logs/` directory  
-- `TEST.sh` exercises main path  
-
-## 5. Known Limitations
-
-Be honest about edge cases or performance bottlenecks:
-- Long-running API calls  
-- Handling of ambiguous user inputs  
 
