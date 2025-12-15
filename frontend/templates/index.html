@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CIFR Agent System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>CIFR Agent System</h1>
+        <p>Analyze collaboration messages for friction and get intervention suggestions.</p>
+
+        <div class="input-section">
+            <form id="messageForm" enctype="multipart/form-data">
+                <textarea id="text_content" name="text_content" placeholder="Enter your message here..." rows="5"></textarea>
+                <input type="file" id="image_file" name="image_file" accept="image/*">
+                <button type="submit">Analyze Message</button>
+            </form>
+            <div id="loading" class="hidden">Processing...</div>
+        </div>
+
+        <div class="results-section">
+            <h2>Analysis Results</h2>
+            <div id="error_message" class="error hidden"></div>
+
+            <div class="result-card" id="original_message_card">
+                <h3>Submitted Message</h3>
+                <p><strong>Text:</strong> <span id="original_text"></span></p>
+                <div id="original_image_container" class="hidden">
+                    <strong>Image:</strong><br>
+                    <img id="original_image" src="" alt="Submitted Image" style="max-width: 100%; height: auto;">
+                </div>
+            </div>
+
+            <div class="result-card hidden" id="communication_analysis_card">
+                <h3>Communication Agent Analysis</h3>
+                <p><strong>Sentiment Score:</strong> <span id="sentiment_score"></span></p>
+                <p><strong>Sentiment Magnitude:</strong> <span id="sentiment_magnitude"></span></p>
+                <h4>Entities:</h4>
+                <ul id="entities_list"></ul>
+                <h4>Gemini Multimodal Response:</h4>
+                <pre id="gemini_response"></pre>
+            </div>
+
+            <div class="result-card hidden" id="knowledge_update_card">
+                <h3>Knowledge Base Update</h3>
+                <p><span id="knowledge_status"></span></p>
+            </div>
+
+            <div class="result-card hidden" id="friction_detection_card">
+                <h3>Friction Detection</h3>
+                <p><strong>Friction Detected:</strong> <span id="friction_detected"></span></p>
+                <p><strong>Reason:</strong> <span id="friction_reason"></span></p>
+                <p><strong>Severity:</strong> <span id="friction_severity"></span></p>
+            </div>
+
+            <div class="result-card hidden" id="intervention_suggestion_card">
+                <h3>Intervention Suggestion</h3>
+                <p><strong>Intervention Suggested:</strong> <span id="intervention_suggested"></span></p>
+                <p><strong>Suggestion:</strong> <span id="intervention_text"></span></p>
+            </div>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
