@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CIFR Agent System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <!-- Header with Logos -->
+        <div class="header-section">
+            <div class="logo-container">
+                <img src="{{ url_for('static', filename='Gemini.png') }}" alt="Gemini AI" class="logo gemini-logo">
+                <img src="{{ url_for('static', filename='ODSC-AI.jpeg') }}" alt="ODSC AI" class="logo odsc-logo">
+            </div>
+            <h1>🤖 CIFR Agent System</h1>
+            <p class="subtitle">AI-Powered Collaboration Intelligence & Friction Reduction</p>
+        </div>
+        
+        <!-- CIFR Orchestration Overview -->
+        <div class="orchestration-section">
+            <h2>🎯 CIFR Orchestration System</h2>
+            <p class="orchestration-description">
+                The <strong>CIFR (Collaborative Intelligence & Friction Reduction) Agent System</strong> is an intelligent orchestration platform 
+                that coordinates multiple specialized AI agents to monitor, analyze, and improve team collaboration. The system processes 
+                collaboration messages through a sophisticated pipeline where each agent plays a critical role in understanding context, 
+                detecting issues, and providing actionable insights.
+            </p>
+            <div class="orchestration-flow">
+                <div class="flow-step">📥 Input</div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-step">💬 Communication</div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-step">📚 Knowledge</div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-step">⚠️ Friction</div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-step">💡 Intervention</div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-step">📤 Output</div>
+            </div>
+        </div>
+        
+        <!-- Agent Overview Section -->
+        <div class="agents-overview">
+            <h2>Meet Your AI Agents</h2>
+            <div class="agent-cards">
+                <div class="agent-card agent-blue">
+                    <div class="agent-icon">💬</div>
+                    <h3>Communication Agent</h3>
+                    <p>Analyzes messages using Gemini AI to extract sentiment, entities, and context from text and images. Provides deep understanding of communication patterns and emotional tone.</p>
+                </div>
+                <div class="agent-card agent-red">
+                    <div class="agent-icon">📚</div>
+                    <h3>Knowledge Agent</h3>
+                    <p>Acts as the central memory hub, storing and retrieving context from all communications. Maintains a knowledge base that enables agents to understand patterns and historical context.</p>
+                </div>
+                <div class="agent-card agent-yellow">
+                    <div class="agent-icon">⚠️</div>
+                    <h3>Friction Detection Agent</h3>
+                    <p>Identifies misalignments, conflicts, and potential friction points in team communications. Uses AI reasoning to detect subtle patterns and escalation risks.</p>
+                </div>
+                <div class="agent-card agent-green">
+                    <div class="agent-icon">💡</div>
+                    <h3>Intervention Agent</h3>
+                    <p>Provides intelligent, actionable suggestions to resolve friction and improve collaboration. Generates context-aware recommendations for clarification, action items, or mediation.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Demo Examples Section -->
+        <div class="demo-section">
+            <h2>🚀 Try Demo Examples</h2>
+            <p class="demo-description">Click any example below to see the AI agents in action:</p>
+            <div class="demo-buttons">
+                <button class="demo-btn" data-example="frustrated">😤 Frustrated Delay Scenario</button>
+                <button class="demo-btn" data-example="timeline">⏰ Timeline Slippage Issue</button>
+                <button class="demo-btn" data-example="positive">✅ Positive Resolution</button>
+                <button class="demo-btn" data-example="conflict">⚔️ Team Conflict</button>
+                <button class="demo-btn" data-example="multimodal">📊 Data Analysis Request</button>
+            </div>
+        </div>
+
+        <div class="input-section">
+            <h2>📝 Custom Message Analysis</h2>
+            <form id="messageForm" enctype="multipart/form-data">
+                <textarea id="text_content" name="text_content" placeholder="Enter your collaboration message here... (e.g., 'I'm concerned about the project timeline slipping. We need to address this immediately.')" rows="5"></textarea>
+                <input type="file" id="image_file" name="image_file" accept="image/*">
+                <label for="image_file" class="file-label">📷 Optional: Upload an image, chart, or diagram for multimodal analysis</label>
+                <button type="submit">🔍 Analyze Message with AI Agents</button>
+            </form>
+            <div id="loading" class="hidden">
+                <div class="spinner"></div>
+                <p>Processing through AI agents... This may take a few seconds.</p>
+            </div>
+        </div>
+
+        <div class="results-section">
+            <h2>Analysis Results</h2>
+            <div id="error_message" class="error hidden"></div>
+
+            <div class="result-card" id="original_message_card">
+                <h3>Submitted Message</h3>
+                <p><strong>Text:</strong> <span id="original_text"></span></p>
+                <div id="original_image_container" class="hidden">
+                    <strong>Image:</strong><br>
+                    <img id="original_image" src="" alt="Submitted Image" style="max-width: 100%; height: auto;">
+                </div>
+            </div>
+
+            <div class="result-card hidden" id="communication_analysis_card">
+                <h3>Communication Agent Analysis</h3>
+                <p><strong>Sentiment Score:</strong> <span id="sentiment_score"></span></p>
+                <p><strong>Sentiment Magnitude:</strong> <span id="sentiment_magnitude"></span></p>
+                <h4>Entities:</h4>
+                <ul id="entities_list"></ul>
+                <h4>Gemini Multimodal Response:</h4>
+                <pre id="gemini_response"></pre>
+            </div>
+
+            <div class="result-card hidden" id="knowledge_update_card">
+                <h3>📚 Knowledge Agent - Context Storage</h3>
+                <p><strong>Status:</strong> <span id="knowledge_status"></span></p>
+                <p class="knowledge-description">The Knowledge Agent has stored this communication analysis in the knowledge base, enabling future context-aware analysis and pattern recognition across all team interactions.</p>
+            </div>
+
+            <div class="result-card hidden" id="friction_detection_card">
+                <h3>Friction Detection</h3>
+                <p><strong>Friction Detected:</strong> <span id="friction_detected"></span></p>
+                <p><strong>Reason:</strong> <span id="friction_reason"></span></p>
+                <p><strong>Severity:</strong> <span id="friction_severity"></span></p>
+            </div>
+
+            <div class="result-card hidden" id="intervention_suggestion_card">
+                <h3>Intervention Suggestion</h3>
+                <p><strong>Intervention Suggested:</strong> <span id="intervention_suggested"></span></p>
+                <p><strong>Suggestion:</strong> <span id="intervention_text"></span></p>
+            </div>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
